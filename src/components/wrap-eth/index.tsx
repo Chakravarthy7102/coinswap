@@ -17,7 +17,7 @@ type WrapETHProps = {
 export default function WrapETH({ address, provider }: WrapETHProps) {
   const [estimatedGasCost, setEstimatedGasCost] = useState("0");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>();
   const [isSuccess, setIsSuccess] = useState(false);
 
   const [ethValueToWrap, setEthValueToWrap] = useState("0");
@@ -41,7 +41,7 @@ export default function WrapETH({ address, provider }: WrapETHProps) {
 
   async function fetchGasEstimation(value: string) {
     try {
-      setError(null);
+      setError(undefined);
 
       if (!value || Number(value) <= 0) {
         setEstimatedGasCost("0");
@@ -80,9 +80,9 @@ export default function WrapETH({ address, provider }: WrapETHProps) {
     }
   }
 
-  async function wrapETH() {
+  async function handleWrapETH() {
     setLoading(true);
-    setError(null);
+    setError(undefined);
 
     try {
       const signer = await provider.getSigner();
@@ -153,7 +153,11 @@ export default function WrapETH({ address, provider }: WrapETHProps) {
         <Info className="size-4 text-primary mr-2" /> Estimated Gas:{" "}
         {estimatedGasCost} ETH
       </p>
-      <Button onClick={wrapETH} disabled={loading || !Number(ethValueToWrap)}>
+      <Button
+        className="w-full"
+        onClick={handleWrapETH}
+        disabled={loading || !Number(ethValueToWrap)}
+      >
         {loading ? "Wrapping..." : "Wrap"}
       </Button>
     </div>

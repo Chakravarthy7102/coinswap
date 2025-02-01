@@ -38,7 +38,7 @@ const mockTransactions = [
 
 export default function TransactionHistory() {
   return (
-    <Table className="mt-10">
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>WETH Amount</TableHead>

@@ -8,10 +8,11 @@ import TransactionHistory from "@/components/transaction-history";
 import WrapETH from "@/components/wrap-eth";
 import { useWallet } from "@/context/wallet-context";
 import { Button } from "@/components/ui/button";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 export default function Home() {
   const { address, provider, connect, isConnecting } = useWallet();
+  const [activeTab, setActiveTab] = useState("swap");
 
   if (!address || !provider) {
     return (
@@ -38,8 +39,13 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col gap-8 row-start-2 items-start justify-start mt-32 max-w-4xl mx-auto px-5">
-      <Tabs className="w-full" defaultValue="swap">
+    <main className="flex flex-col gap-8 row-start-2 items-start justify-start mt-32 max-w-lg mx-auto px-5">
+      <Tabs
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className="w-full"
+        defaultValue="swap"
+      >
         <TabsList>
           <TabsTrigger className="flex gap-2" value="swap">
             <ArrowRightLeft className="size-4" />
@@ -55,7 +61,11 @@ export default function Home() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="swap">
-          <Swap />
+          <Swap
+            address={address}
+            provider={provider}
+            setActiveTab={setActiveTab}
+          />
         </TabsContent>
         <TabsContent value="wrap_eth">
           <WrapETH address={address} provider={provider} />
