@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useWallet } from "@/context/wallet-context";
 import { Bird, Gem, Power } from "lucide-react";
@@ -16,6 +16,36 @@ import { getETHBalance, getWETHBalance } from "@/utils/wallet";
 
 export default function Navbar() {
   const { address, connect, disconnect, isConnecting, provider } = useWallet();
+  const [ethBalance, setETHBalance] = useState("0");
+  const [wEthBalance, setWETHBalance] = useState("0");
+
+  async function fetchEthBalance() {
+    if (provider && address) {
+      try {
+        const eth = await getETHBalance(provider, address);
+        setETHBalance(eth);
+      } catch {
+        alert("Failed to fetch ETH balance");
+      }
+    }
+  }
+
+  async function fetchWethBalance() {
+    if (provider && address) {
+      try {
+        const weth = await getWETHBalance(provider, address);
+        setWETHBalance(weth);
+      } catch {
+        alert("Failed to fetch WETH balance");
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchEthBalance();
+    fetchWethBalance();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [provider, address]);
 
   return (
     <nav className="flex items-center justify-between px-8 py-4">
@@ -43,14 +73,14 @@ export default function Navbar() {
             <div className="grid grid-cols-2 text-sm gap-x-2 w-72">
               <h4 className="font-medium ">Ethereum</h4>{" "}
               <span className="font-semibold font-mono">
-                : {getETHBalance(provider, address)} ETH
+                : {ethBalance} ETH
               </span>
             </div>
 
             <div className="grid grid-cols-2 text-sm gap-x-2  w-72">
               <h4 className="font-medium ">Wrapped Ethereum</h4>{" "}
               <span className="font-semibold font-mono">
-                : {getWETHBalance(provider, address)} WETH
+                : {wEthBalance} WETH
               </span>
             </div>
 
