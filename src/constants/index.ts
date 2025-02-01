@@ -1,6 +1,7 @@
 export const WETH_ABI = [
   "function balanceOf(address owner) view returns (uint256)",
   "function decimals() view returns (uint8)",
+  "function deposit() public payable",
 ];
 
 export const WETH_CONTRACT_ADDRESS =
