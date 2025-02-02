@@ -24,14 +24,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { ethereum } = window;
-
+  const isMetamaskInstalled = typeof window !== "undefined" && !window.ethereum;
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
-        {!ethereum ? (
+        {isMetamaskInstalled ? (
           <main className="h-screen items-center flex justify-center text-center">
             <div className="flex h-fit flex-col gap-5 row-start-2 items-center justify-center border max-w-5xl mx-4 py-16 px-6 md:px-32 rounded-md">
               <Rabbit className="text-primary size-10" />

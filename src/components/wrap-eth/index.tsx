@@ -124,42 +124,43 @@ export default function WrapETH({ address, provider }: WrapETHProps) {
           <span className="font-semibold font-mono">: {wEthBalance} WETH</span>
         </div>
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="ethValue">Enter ETH value to wrap</Label>
-        <Input
-          id="ethValue"
-          name="ethValue"
-          placeholder="0.1"
-          type="number"
-          value={ethValueToWrap}
-          onInput={handleEthValueChange}
-        />
-      </div>
-      {error ? (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      ) : null}
-      {isSuccess ? (
-        <Alert variant="success">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Success</AlertTitle>
-          <AlertDescription>Your tranaction was successful</AlertDescription>
-        </Alert>
-      ) : null}
-      <p className="mt-2 text-xs flex items-center">
-        <Info className="size-4 text-primary mr-2" /> Estimated Gas:{" "}
-        {estimatedGasCost} ETH
-      </p>
-      <Button
-        className="w-full"
-        onClick={handleWrapETH}
-        disabled={loading || !Number(ethValueToWrap)}
-      >
-        {loading ? "Wrapping..." : "Wrap"}
-      </Button>
+      <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+        <div className="space-y-2">
+          <Label htmlFor="ethValue">Enter ETH value to wrap</Label>
+          <Input
+            id="ethValue"
+            name="ethValue"
+            placeholder="0.1"
+            type="number"
+            onInput={handleEthValueChange}
+          />
+        </div>
+        {error ? (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        ) : null}
+        {isSuccess ? (
+          <Alert variant="success">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Success</AlertTitle>
+            <AlertDescription>Your tranaction was successful</AlertDescription>
+          </Alert>
+        ) : null}
+        <p className="mt-2 text-xs flex items-center">
+          <Info className="size-4 text-primary mr-2" /> Estimated Gas:{" "}
+          {estimatedGasCost} ETH
+        </p>
+        <Button
+          className="w-full"
+          onClick={handleWrapETH}
+          disabled={loading || !Number(ethValueToWrap)}
+        >
+          {loading ? "Wrapping..." : "Wrap"}
+        </Button>
+      </form>
     </div>
   );
 }
