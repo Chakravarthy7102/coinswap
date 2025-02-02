@@ -37,8 +37,8 @@ export default function AccountDetailsDialog({
         <DialogHeader>
           <DialogTitle>Account</DialogTitle>
         </DialogHeader>
-        <div className="flex items-center gap-x-2 font-mono text-sm font-semibold text-primary">
-          <Gem className="bg-primary/30 p-1 size-6 rounded-full" />
+        <div className="flex items-center gap-x-2 font-mono text-sm font-semibold text-primary max-w-lg overflow-hidden">
+          <Gem className="bg-primary/30 p-1 size-6 rounded-full flex-shrink-0" />
           {address}
         </div>
 

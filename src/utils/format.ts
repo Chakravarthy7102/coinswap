@@ -10,10 +10,10 @@ export function truncateAddress(address: string) {
 const READABLE_FORM_LEN = 4;
 
 export function fromReadableAmount(
-  amount: number,
+  amount: string,
   decimals: number
 ): BigNumberish {
-  return ethers.parseUnits(amount.toString(), decimals);
+  return ethers.parseUnits(amount, decimals);
 }
 
 export function toReadableAmount(rawAmount: number, decimals: number): string {

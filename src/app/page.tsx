@@ -39,7 +39,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col gap-8 row-start-2 items-start justify-start mt-32 max-w-lg mx-auto px-5">
+    <main className="flex flex-col gap-8 row-start-2 items-start justify-start mt-10 md:mt-32 max-w-2xl mx-auto px-5">
       <Tabs
         value={activeTab}
         onValueChange={setActiveTab}
@@ -57,7 +57,8 @@ export default function Home() {
           </TabsTrigger>
           <TabsTrigger className="flex gap-2" value="transaction_history">
             <History className="size-4" />
-            Transaction History
+            <span className="hidden md:block">Transaction</span>{" "}
+            <span className="block md:hidden">Tx</span> History
           </TabsTrigger>
         </TabsList>
         <TabsContent value="swap">

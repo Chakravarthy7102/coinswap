@@ -100,6 +100,10 @@ export default function WrapETH({ address, provider }: WrapETHProps) {
       setIsSuccess(true);
       setEthValueToWrap("0");
       setEstimatedGasCost("0");
+      const ethValue = document.getElementById("ethValue") as HTMLInputElement;
+      if (ethValue) {
+        ethValue.value = "";
+      }
       setTimeout(() => {
         setIsSuccess(false);
       }, 3000);
@@ -133,6 +137,7 @@ export default function WrapETH({ address, provider }: WrapETHProps) {
             placeholder="0.1"
             type="number"
             onInput={handleEthValueChange}
+            disabled={loading}
           />
         </div>
         {error ? (

@@ -1,22 +1,13 @@
-import { Token } from "@uniswap/sdk-core";
-
 export type TokenDetails = {
   name: string;
   symbol: string;
+  decimals: number;
 };
 
-export type SwapConfig = {
-  rpc:
-    | {
-        local: string;
-      }
-    | {
-        mainnet: string;
-      };
-  tokens: {
-    in: Token;
-    amountIn: number;
-    out: Token;
-    poolFee: number;
-  };
+export type SwapSummaryConfig = {
+  swapRate: number;
+  gasCost: number;
+  finalAmount: number;
+  priceImpact: number;
+  minimumAmountOut: number;
 };
