@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+Please follow this following setup local blockchain setup with Foundry and Anvil
+
+Run the development server:
 
 ```bash
+# Install dependecies
+npm install
+# Run local dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Future improvements
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Should fetch quote prices for every 10 secs simiar to uniswap does.
+- Add tooltips and extra information on the UI so that techincal jargons are better understafing for the users
+- Update trasaction history with actual user transaction history instead of mock json.
 
-## Learn More
+## Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+Follow the [Uniswap guide](https://docs.uniswap.org/sdk/v3/guides/local-development#using-foundry-and-anvil) to set up a local blockchain environment using Foundry and Anvil.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Running the Development Server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Install dependencies
+npm install
+# Start the local development server
+npm run dev
+```
 
-## Deploy on Vercel
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Future Improvements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Fetch latest quote prices every 10 seconds, similar to Uniswap.
+- Add tooltips and extra information on the UI to make technical terms easier to understand.
+- Replace mock transaction history with actual user transactions.

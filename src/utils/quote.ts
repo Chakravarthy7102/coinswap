@@ -193,7 +193,7 @@ export async function executeSwap({
     const amountOutMin = ethers.parseUnits(minimumAmountOut, tokenB.decimals);
     const path = [tokenA.address, tokenB.address];
     const to = wallet.address;
-    const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes from now
+    const deadline = Math.floor(Date.now() / 1000) + 60 * 20;
 
     const swapTx = await router.swapExactTokensForTokens(
       amountInWei,
@@ -204,8 +204,6 @@ export async function executeSwap({
     );
 
     await swapTx.wait();
-
-    console.log(`Swap successful! Tx hash: ${swapTx.hash}`, swapTx);
     return swapTx.hash;
   } catch (error) {
     console.error("Swap failed:", error);

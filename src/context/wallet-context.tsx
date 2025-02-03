@@ -27,8 +27,6 @@ export function useWallet() {
 export default function WalletContextProvider({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { ethereum } = window;
-
   const [address, setAddress] = useState<string | undefined>();
   const [provider, setProvider] = useState<
     ethers.BrowserProvider | undefined
@@ -37,6 +35,8 @@ export default function WalletContextProvider({
   const [isConnecting, setIsConnecting] = useState(false);
 
   async function connect() {
+    const { ethereum } = window;
+
     if (ethereum && !address) {
       try {
         setIsConnecting(true);
@@ -57,6 +57,7 @@ export default function WalletContextProvider({
   }
 
   async function disconnect() {
+    const { ethereum } = window;
     if (ethereum) {
       ethereum.request({
         method: "wallet_revokePermissions",
@@ -71,6 +72,7 @@ export default function WalletContextProvider({
 
   // internal method
   async function _fetchWalletConnectionInfo() {
+    const { ethereum } = window;
     const provider = new ethers.BrowserProvider(ethereum);
     if (provider) {
       setProvider(provider);
@@ -84,13 +86,14 @@ export default function WalletContextProvider({
           setChainId(Number(network.chainId));
         }
       } catch {
-        alert("Failed to list accounts");
+        console.log("Failed to fetch wallet connection info");
       }
     }
   }
 
   // internal method
   async function _setupListeners() {
+    const { ethereum } = window;
     if (typeof ethereum !== "undefined") {
       ethereum.on("accountsChanged", (accountsAddresses: string[]) => {
         if (accountsAddresses.length > 0) {
@@ -113,8 +116,8 @@ export default function WalletContextProvider({
     _fetchWalletConnectionInfo();
     _setupListeners();
     return () => {
-      if (ethereum) {
-        ethereum.removeAllListeners();
+      if (window.ethereum) {
+        window.ethereum.removeAllListeners();
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -32,7 +32,7 @@ export default function Swap({
   provider,
   setActiveTab,
 }: SwapDialogProps) {
-  const { wEthBalance } = useBalances({ address, provider });
+  const { wEthBalance, refetchBalances } = useBalances({ address, provider });
   const [error, setError] = useState<string>();
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -194,6 +194,7 @@ export default function Swap({
       });
       setIsSuccess(true);
       resetForm();
+      refetchBalances();
       setTimeout(() => {
         setIsSuccess(false);
       }, 5000);
